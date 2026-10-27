@@ -1,8 +1,16 @@
 # code-review-agent
 
+[![ci](https://github.com/Nikith009/code-review-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/Nikith009/code-review-agent/actions/workflows/ci.yml) [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Nikith009/code-review-agent)
+
 A LangGraph agent that reviews GitHub pull requests the way a senior engineer would: it reads the diff, pulls in surrounding code when it needs context, reasons about what the change actually does, and posts inline comments on security problems, bugs and risky patterns. It is not a linter; there are no hard-coded rules about what counts as a problem.
 
 It runs from the command line or as a GitHub Action on every pull request.
+
+## Try it
+
+- **Run the tests:** [CI workflow](https://github.com/Nikith009/code-review-agent/actions/workflows/ci.yml) → *Run workflow*. Includes tests against the live GitHub API.
+- **Watch it review a PR:** add an `ANTHROPIC_API_KEY` repository secret, then [open the demo pull request](https://github.com/Nikith009/code-review-agent/compare/main...demo/unsafe-login?expand=1). The branch rewrites [`examples/demo_app/auth.py`](examples/demo_app/auth.py) with an SQL injection, a logged password and a weakened password check; the review workflow posts inline comments on it within a minute or two.
+- **In the browser:** [open a Codespace](https://codespaces.new/Nikith009/code-review-agent), then `pytest -q` or `review-agent review --repo owner/name --pr N --dry-run`.
 
 ## How it works
 
