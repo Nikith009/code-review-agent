@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code-review-agent"
+version = "0.1.0"
+description = "A LangGraph agent that reviews pull requests and posts inline comments."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Veera Sai Nikith Kantipudi" }]
+license = { text = "MIT" }
+dependencies = [
+    "anthropic>=0.40",
+    "langgraph>=0.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+review-agent = "review_agent.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501", "B905"]
